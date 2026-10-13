@@ -1,0 +1,55 @@
+{% extends 'admin/base.html' %}
+{% block title %}Cadastrar Produto{% endblock %}
+{% block page_title %}Cadastrar Produto{% endblock %}
+{% block breadcrumb %}Novo produto{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-xl-8 col-lg-10">
+    <div class="card card-primary card-outline">
+      <div class="card-header"><h3 class="card-title">Dados do produto</h3></div>
+      <form method="POST" enctype="multipart/form-data">
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="nome_produto" class="form-label">Nome do Produto</label>
+            <input type="text" class="form-control" id="nome_produto" name="nome_produto" maxlength="50"
+                   value="{{ request.form.get('nome_produto', '') }}" required>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="preco" class="form-label">Preço (R$)</label>
+              <input type="text" class="form-control" id="preco" name="preco" inputmode="decimal"
+                     placeholder="0,00" value="{{ request.form.get('preco', '') }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="id_categoria" class="form-label">Categoria</label>
+              <select class="form-select" id="id_categoria" name="id_categoria">
+                <option value="">Sem categoria</option>
+                {% for c in categorias %}
+                <option value="{{ c.id }}" {% if request.form.get('id_categoria') == c.id|string %}selected{% endif %}>{{ c.nome }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="ativo" class="form-label">Status</label>
+            <select class="form-select" id="ativo" name="ativo">
+              <option value="True">Ativo</option>
+              <option value="False">Inativo</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="imagem" class="form-label">Imagem</label>
+            <input type="file" class="form-control" id="imagem" name="imagem" accept="image/png,image/jpeg,image/gif,image/webp">
+            <div class="form-text">A imagem será salva em <code>static/uploads</code>; no banco ficará apenas o endereço.</div>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <a href="{{ url_for('listarProduto') }}" class="btn btn-secondary">Cancelar</a>
+          <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg me-1"></i>Cadastrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
