@@ -1,0 +1,18 @@
+{% extends 'cliente/base.html' %}
+{% block title %}Produtos{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">Produtos</h1>
+<div class="d-flex flex-wrap gap-2 mb-4">
+  <a class="btn btn-sm rounded-pill {{ 'btn-dark' if not categoria_atual else 'btn-outline-dark' }}" href="{{ url_for('cliente_produtos') }}">Todos</a>
+  {% for c in categorias %}
+  <a class="btn btn-sm rounded-pill {{ 'btn-dark' if categoria_atual == c['id'] else 'btn-outline-dark' }}"
+     href="{{ url_for('cliente_produtos', categoria=c['id']) }}">{{ c['nome'] }}</a>
+  {% endfor %}
+</div>
+<div class="row g-3">
+  {% for p in produtos %}{% include 'cliente/_card.html' %}
+  {% else %}
+  <div class="col-12 text-secondary">Nenhum produto nesta categoria ainda. <a href="{{ url_for('cliente_produtos') }}">Ver todos os produtos</a></div>
+  {% endfor %}
+</div>
+{% endblock %}

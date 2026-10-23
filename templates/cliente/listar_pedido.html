@@ -1,0 +1,24 @@
+{% extends 'cliente/base.html' %}
+{% block title %}Meus pedidos{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">Meus pedidos</h1>
+<div class="card border-0 shadow-sm">
+  <div class="table-responsive">
+    <table class="table align-middle mb-0">
+      <thead><tr><th>#</th><th>Data</th><th>Pagamento</th><th>Status</th><th class="text-end">Total</th><th></th></tr></thead>
+      <tbody>
+        {% for p in pedidos %}
+        <tr>
+          <td>{{ p['id'] }}</td><td>{{ p['data'] | data_br }}</td><td>{{ p['pagamento'] }}</td>
+          <td><span class="badge text-bg-success">{{ p['status'] }}</span></td>
+          <td class="text-end fw-semibold">{{ p['total'] | brl }}</td>
+          <td class="text-end"><a class="btn btn-sm btn-outline-dark" href="{{ url_for('cliente_pedido', id_pedido=p['id']) }}">Ver</a></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="text-center text-secondary py-4">Você ainda não fez nenhum pedido. <a href="{{ url_for('cliente_produtos') }}">Ver produtos</a></td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

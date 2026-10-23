@@ -1,0 +1,18 @@
+<div class="col-6 col-md-4 col-lg-3">
+  <div class="card h-100 border-0 shadow-sm overflow-hidden">
+    {% if p['img'] %}
+      <img class="produto-img" src="{{ url_for('static', filename=p['img']) }}" alt="{{ p['nome'] }}">
+    {% else %}
+      <div class="produto-vazio"><i class="bi bi-image"></i></div>
+    {% endif %}
+    <div class="card-body d-flex flex-column">
+      <div class="small text-secondary">{{ p['categoria_nome'] or 'Sem categoria' }}</div>
+      <div class="fw-semibold fs-5">{{ p['nome'] }}</div>
+      <div class="preco mt-1">{{ p['preco'] | brl }}</div>
+      <form method="post" action="{{ url_for('cliente_adicionar', id_produto=p['id']) }}" class="mt-auto pt-3">
+        <input type="hidden" name="volta" value="{{ request.full_path.rstrip('?') }}">
+        <button class="btn btn-teal btn-sm w-100" type="submit"><i class="bi bi-cart-plus me-1"></i> Adicionar ao carrinho</button>
+      </form>
+    </div>
+  </div>
+</div>

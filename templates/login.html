@@ -1,0 +1,18 @@
+{% extends 'auth_base.html' %}
+{% block title %}Entrar{% endblock %}
+{% block content %}
+<h1 class="h4 mb-1">Entrar</h1>
+<p class="text-secondary mb-4">Administradores vão para o painel e clientes para a loja.</p>
+<form method="post">
+  <div class="mb-3">
+    <label for="usuario" class="form-label">Usuário</label>
+    <input type="text" class="form-control" id="usuario" name="usuario" value="{{ usuario or '' }}" autocomplete="username" autofocus required>
+  </div>
+  <div class="mb-4">
+    <label for="senha" class="form-label">Senha</label>
+    <input type="password" class="form-control" id="senha" name="senha" autocomplete="current-password" required>
+  </div>
+  <button class="btn btn-teal w-100" type="submit">Entrar</button>
+</form>
+<p class="text-center mt-4 mb-0">Ainda não tem conta? <a href="{{ url_for('registrar') }}">Criar conta de cliente</a></p>
+{% endblock %}

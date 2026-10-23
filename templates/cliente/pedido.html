@@ -1,0 +1,23 @@
+{% extends 'cliente/base.html' %}
+{% block title %}Pedido {{ pedido['id'] }}{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+  <h1 class="h3 mb-0">Pedido #{{ pedido['id'] }} <span class="badge text-bg-success fs-6 align-middle">{{ pedido['status'] }}</span></h1>
+  <div class="text-secondary">{{ pedido['data'] | data_br }} · Pagamento: {{ pedido['pagamento'] }}</div>
+</div>
+<div class="card border-0 shadow-sm mb-3">
+  <div class="table-responsive">
+    <table class="table align-middle mb-0">
+      <thead><tr><th>Produto</th><th class="text-end">Preço</th><th class="text-end">Qtd.</th><th class="text-end">Subtotal</th></tr></thead>
+      <tbody>
+        {% for i in itens %}
+        <tr><td>{{ i['nome'] }}</td><td class="text-end">{{ i['preco'] | brl }}</td><td class="text-end">{{ i['quantidade'] }}</td><td class="text-end">{{ (i['preco'] * i['quantidade']) | brl }}</td></tr>
+        {% endfor %}
+      </tbody>
+      <tfoot><tr><th colspan="3" class="text-end">Total</th><th class="text-end preco">{{ pedido['total'] | brl }}</th></tr></tfoot>
+    </table>
+  </div>
+</div>
+<a class="btn btn-teal" href="{{ url_for('cliente_produtos') }}">Continuar comprando</a>
+<a class="btn btn-outline-dark" href="{{ url_for('cliente_pedidos') }}">Meus pedidos</a>
+{% endblock %}

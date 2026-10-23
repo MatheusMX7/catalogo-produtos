@@ -1,0 +1,10 @@
+{% extends 'cliente/base.html' %}
+{% block title %}Categorias{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">Categorias</h1>
+<div class="row g-3">
+  {% for c in categorias %}{% include 'cliente/_tile.html' %}
+  {% else %}<p class="text-secondary">Nenhuma categoria disponível no momento.</p>
+  {% endfor %}
+</div>
+{% endblock %}

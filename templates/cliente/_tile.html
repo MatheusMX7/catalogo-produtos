@@ -1,0 +1,6 @@
+<div class="col-12 col-sm-6 col-lg-4">
+  <a class="tile" href="{{ url_for('cliente_produtos', categoria=c['id']) }}"
+     {% if c['img'] %}style="background-image: url('{{ url_for('static', filename=c['img']) }}')"{% endif %}>
+    <span class="tile-text"><strong>{{ c['nome'] }}</strong>{{ c['descricao'] or '' }}</span>
+  </a>
+</div>

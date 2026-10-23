@@ -1,0 +1,23 @@
+{% extends 'auth_base.html' %}
+{% block title %}Criar conta{% endblock %}
+{% block content %}
+<h1 class="h4 mb-1">Criar conta</h1>
+<p class="text-secondary mb-4">Com a conta de cliente você vê as categorias e os produtos da loja.</p>
+<form method="post">
+  <div class="mb-3">
+    <label for="usuario" class="form-label">Usuário</label>
+    <input type="text" class="form-control" id="usuario" name="usuario" value="{{ usuario or '' }}" minlength="3" autocomplete="username" autofocus required>
+  </div>
+  <div class="mb-3">
+    <label for="senha" class="form-label">Senha</label>
+    <input type="password" class="form-control" id="senha" name="senha" minlength="6" autocomplete="new-password" required>
+    <div class="form-text">Use pelo menos 6 caracteres.</div>
+  </div>
+  <div class="mb-4">
+    <label for="confirmar" class="form-label">Confirmar senha</label>
+    <input type="password" class="form-control" id="confirmar" name="confirmar" autocomplete="new-password" required>
+  </div>
+  <button class="btn btn-teal w-100" type="submit">Criar conta</button>
+</form>
+<p class="text-center mt-4 mb-0">Já tem conta? <a href="{{ url_for('login') }}">Entrar</a></p>
+{% endblock %}

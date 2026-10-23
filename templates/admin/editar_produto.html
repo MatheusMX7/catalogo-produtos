@@ -1,0 +1,64 @@
+{% extends 'admin/base.html' %}
+{% block title %}Editar Produto{% endblock %}
+{% block page_title %}Editar Produto{% endblock %}
+{% block breadcrumb %}Editar produto{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-xl-8 col-lg-10">
+    <div class="card card-warning card-outline">
+      <div class="card-header"><h3 class="card-title">Produto #{{ produto.id }}</h3></div>
+      <form method="POST" enctype="multipart/form-data">
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="nome_produto" class="form-label">Nome do Produto</label>
+            <input type="text" class="form-control" id="nome_produto" name="nome_produto" maxlength="50"
+                   value="{{ produto.nome }}" required>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="preco" class="form-label">Preço (R$)</label>
+              <input type="text" class="form-control" id="preco" name="preco" inputmode="decimal"
+                     value="{{ ('%.2f'|format(produto.preco))|replace('.', ',') if produto.preco is not none else '' }}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="id_categoria" class="form-label">Categoria</label>
+              <select class="form-select" id="id_categoria" name="id_categoria">
+                <option value="">Sem categoria</option>
+                {% for c in categorias %}
+                <option value="{{ c.id }}" {% if produto.id_categoria == c.id %}selected{% endif %}>{{ c.nome }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="ativo" class="form-label">Status</label>
+            <select class="form-select" id="ativo" name="ativo">
+              <option value="True" {% if produto.ativo|string == 'True' %}selected{% endif %}>Ativo</option>
+              <option value="False" {% if produto.ativo|string == 'False' %}selected{% endif %}>Inativo</option>
+            </select>
+          </div>
+
+          {% if produto.img %}
+          <div class="mb-3">
+            <label class="form-label d-block">Imagem atual</label>
+            <img src="{{ url_for('static', filename=produto.img) }}" alt="Imagem de {{ produto.nome }}" class="image-preview">
+            <div class="form-text">Endereço salvo: {{ produto.img }}</div>
+          </div>
+          {% endif %}
+
+          <div class="mb-3">
+            <label for="imagem" class="form-label">Nova imagem</label>
+            <input type="file" class="form-control" id="imagem" name="imagem" accept="image/png,image/jpeg,image/gif,image/webp">
+            <div class="form-text">Deixe vazio para manter a imagem atual.</div>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <a href="{{ url_for('listarProduto') }}" class="btn btn-secondary">Cancelar</a>
+          <button type="submit" class="btn btn-warning"><i class="bi bi-save me-1"></i>Salvar alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
