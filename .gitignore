@@ -1,0 +1,4 @@
+.secret_key
+__pycache__/
+.venv/
+database_backup_*.db
