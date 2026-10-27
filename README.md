@@ -1,4 +1,4 @@
-# Catálogo de Produtos
+# Catálogo-Produtos
 
 Sistema web de catálogo e vendas feito com **Flask** e **SQLite**. Tem um painel para o administrador cadastrar categorias e produtos, e uma loja para o cliente ver os produtos, montar o carrinho e finalizar a compra. O acesso é por login: cada usuário entra na área do seu perfil.
 
